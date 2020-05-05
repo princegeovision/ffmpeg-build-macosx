@@ -379,6 +379,7 @@ execute ./configure --arch=64 --prefix=${WORKSPACE} \
      --enable-avfilter \
      --enable-libopencore_amrwb \
      --enable-libopencore_amrnb \
+     --enable-avresample \
      --enable-filters \
      --enable-libvidstab \
      --enable-frei0r \
