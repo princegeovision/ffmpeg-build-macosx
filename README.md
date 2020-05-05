@@ -1,6 +1,8 @@
 Bash script to build and install ffmpeg on Mac OSX and Linux
 ==========
 
+* [DevNote](docs/DevNote.md)
+
 Enhanced version of https://github.com/rtgoodwin/ffmpeg-build-script-plus-frei0r-freetype and its source https://github.com/markus-perl/ffmpeg-build-script .
 
 The original build script provides an easy way to build ffmpeg on OSX and Linux with non-free codecs in addition to the frei0r plugins (for doing fisheye removal on cameras like GoPro, Mobius, etc.), Freetype (for doing text overlays) and fontconfig (plus dependency libxml2).
