@@ -349,7 +349,7 @@ if build "frei0r"; then
 fi
 
 build "ffmpeg"
-download "http://ffmpeg.org/releases/ffmpeg-3.3.4.tar.bz2" "ffmpeg-3.3.4.tar.bz2"
+download "http://ffmpeg.org/releases/ffmpeg-3.1.1.tar.bz2" "ffmpeg-3.1.1.tar.bz2"
 cd $PACKAGES/ffmpeg* || exit
 CFLAGS="-I$WORKSPACE/include `$WORKSPACE/bin/freetype-config --cflags` -I$WORKSPACE/include/vorbis" LDFLAGS="-L$WORKSPACE/lib `$WORKSPACE/bin/freetype-config --libs`" 
 # CFLAGS="-I$WORKSPACE/include" LDFLAGS="-L$WORKSPACE/lib" 
