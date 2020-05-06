@@ -348,13 +348,25 @@ if build "frei0r"; then
        build_done "frei0r"
 fi
 
+if build "speex"; then
+    #download "http://downloads.xiph.org/releases/speex/speex-1.1.12.tar.gz" "speex-1.1.12.tar.gz"
+    #download "http://downloads.xiph.org/releases/speex/speex-1.2.0.tar.gz" "speex-1.2.0.tar.gz"
+    download "https://github.com/xiph/speex/archive/Speex-1.2.0.tar.gz" "Speex-1.2.0.tar.gz"
+    cd $PACKAGES/speex* || exit
+    execute ./autogen.sh
+    execute ./configure --prefix=${WORKSPACE}
+    execute make -j $MJOBS
+    execute make install
+    build_done "speex"
+fi
+
 build "ffmpeg"
 download "http://ffmpeg.org/releases/ffmpeg-3.1.1.tar.bz2" "ffmpeg-3.1.1.tar.bz2"
 cd $PACKAGES/ffmpeg* || exit
 CFLAGS="-I$WORKSPACE/include `$WORKSPACE/bin/freetype-config --cflags` -I$WORKSPACE/include/vorbis" LDFLAGS="-L$WORKSPACE/lib `$WORKSPACE/bin/freetype-config --libs`" 
 # CFLAGS="-I$WORKSPACE/include" LDFLAGS="-L$WORKSPACE/lib" 
 
-execute ./configure --arch=64 --prefix=${WORKSPACE} \
+execute ./configure --arch=x86_64 --prefix=${WORKSPACE} \
      --extra-cflags="-I$WORKSPACE/include" --extra-cflags="-I$WORKSPACE/include/vorbis" --extra-cflags="`$WORKSPACE/bin/freetype-config --cflags`" \
      --extra-ldflags="-L$WORKSPACE/lib" --extra-version=static \
      --disable-debug \
@@ -362,11 +374,9 @@ execute ./configure --arch=64 --prefix=${WORKSPACE} \
      --enable-static \
      --enable-libopencore_amrwb \
      --enable-libopencore_amrnb \
-     --extra-cflags=--static \
      --disable-doc \
      --enable-gpl \
      --enable-version3 \
-     --enable-nonfree \
      --enable-pthreads \
      --enable-libvpx \
      --enable-libmp3lame \
@@ -375,16 +385,16 @@ execute ./configure --arch=64 --prefix=${WORKSPACE} \
      --enable-libx264 \
      --enable-libx265 \
      --enable-runtime-cpudetect \
-     --enable-libfdk-aac \
      --enable-avfilter \
      --enable-libopencore_amrwb \
      --enable-libopencore_amrnb \
      --enable-avresample \
      --enable-libgsm \
+     --disable-decoder=libvpx \
      --enable-filters \
      --enable-libvidstab \
-     --enable-frei0r \
-     --enable-indev=avfoundation 
+     --enable-libspeex \
+     --enable-frei0r
     # enable all filters
     # enable AAC de/encoding via libfdk-aac [no]
     # enable detecting cpu capabilities at runtime (smaller binary)
